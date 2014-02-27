@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Gource-live by janosgyerik</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Gource-live</h1>
+        <h2>Live Git Log For Gource</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/janosgyerik/gource-live/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/janosgyerik/gource-live/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/janosgyerik/gource-live" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="gource-live" class="anchor" href="#gource-live"><span class="octicon octicon-link"></span></a>Gource LIVE</h1>
+
+<p>Visualize activitiy in a VCS branch (LIVE commits!) by polling
+the repository for new commits and feeding the log
+of changes to Gource.</p>
+
+<p>Supported VCS:</p>
+
+<ul>
+<li>Git</li>
+<li>Bazaar</li>
+<li>Subversion</li>
+</ul><h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>Gource: <a href="https://github.com/acaudwell/Gource">https://github.com/acaudwell/Gource</a>
+</li>
+<li>Bash, Perl</li>
+</ul><h2>
+<a name="running-gource-live" class="anchor" href="#running-gource-live"><span class="octicon octicon-link"></span></a>Running gource live</h2>
+
+<ol>
+<li><p>Add <em>this</em> project to your <code>PATH</code> environment variable</p></li>
+<li><p><code>cd</code> into your project's work tree (= local clone, checkout)</p></li>
+<li><p>Run <code>gource-live.sh</code> or <code>/path/to/this/project/gource-live.sh</code></p></li>
+</ol><p>You could also specify the work tree on the command line, for example:</p>
+
+<pre><code>./gource-live.sh /path/to/work/tree
+</code></pre>
+
+<p>By default this will poll the repository every 5 seconds,
+and feed the changes to Gource. Run <code>gource-live.sh --help</code>
+for more options.</p>
+
+<h2>
+<a name="debugging-gource-live" class="anchor" href="#debugging-gource-live"><span class="octicon octicon-link"></span></a>Debugging gource live</h2>
+
+<p>The script has some helpful flags for debugging.</p>
+
+<p>To see what logs would be piped to Gource,
+the <code>--feed-only</code> flag is helpful, and it's also practical to set
+the polling interval to 0 using the <code>-i</code> flag, which will effectively
+make the feeder script exit after a single run:</p>
+
+<pre><code>./gource-live.sh --feed-only -i 0 /path/to/work/tree
+</code></pre>
+
+<p>It can be also useful to debug the feeder scripts directly,
+for example:</p>
+
+<pre><code>./feeders/bzr.sh /path/to/bzr/branch 0
+</code></pre>
+
+<p>You can run the feeder scripts without any parameters to print
+the usage help and see what parameters they need, for example:</p>
+
+<pre><code>$ ./feeders/svn.sh 
+usage: ./feeders/svn.sh PROJECTDIR INTERVAL [STARTREV|0 RELSTART]
+</code></pre>
+
+<h1>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h1>
+
+<p>More feature ideas to do someday.</p>
+
+<ul>
+<li><p>add support for hg (mercurial)</p></li>
+<li><p>bzr and svn could work without a local clone, getting info off the repo url</p></li>
+<li><p>embed sample repos and a harness for easier testing</p></li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>

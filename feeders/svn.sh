@@ -17,6 +17,7 @@ while true
 do
     for REVNO in $(svn log -qr$REVNO:HEAD "$PROJECTDIR" | sed -ne 's/^r\([0-9][0-9]*\).*/\1/p' | tail -n +2)
     do
+        test "$DEBUG" && echo "# REVNO $REVNO" >&2
         AUTHOR=$(svn log -qr $REVNO "$PROJECTDIR" | sed -ne 2p | cut -f2 -d\| | sed -e 's/^ *//' -e 's/ *$//')
         TIMESTAMP=$(svn log -qr $REVNO "$PROJECTDIR" | perl -MTime::Local -ne '/^r[0-9]+ .*([0-9]{4})-([0-9]{2})-([0-9]{2}) (\d\d):(\d\d):(\d\d)/ && print timelocal($6, $5, $4, $3, $2-1, $1)')
         PREFIX="$TIMESTAMP|$AUTHOR|"

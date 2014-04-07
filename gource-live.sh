@@ -86,7 +86,7 @@ else
 fi
 
 if test $feed_only = on; then
-    "$feeder" "$project_dir" $feeder_args
+    DEBUG=1 "$feeder" "$project_dir" $feeder_args
 else
-    "$feeder" "$project_dir" $feeder_args | tee /dev/stderr | gource --log-format custom --file-idle-time 0 -
+    "$feeder" "$project_dir" $feeder_args | tee /dev/stderr | gource --log-format custom --file-idle-time 0 --seconds-per-day 1 -
 fi

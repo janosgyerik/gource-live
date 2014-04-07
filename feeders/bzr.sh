@@ -17,6 +17,7 @@ while true
 do
     for REVNO in $(bzr log --forward --line -r $REVNO.. "$PROJECTDIR" | tail -n +2 | sed -e 's/:.*//')
     do
+        test "$DEBUG" && echo "# REVNO $REVNO" >&2
         AUTHOR=$(bzr log -r $REVNO "$PROJECTDIR" | sed -ne 's/^committer: \([^<]*\>\).*/\1/p')
         TIMESTAMP=$(bzr log -r $REVNO "$PROJECTDIR" | perl -MTime::Local -ne '/^timestamp: .*([0-9]{4})-([0-9]{2})-([0-9]{2}) (\d\d):(\d\d):(\d\d)/ && print timelocal($6, $5, $4, $3, $2-1, $1)')
         PREFIX="$TIMESTAMP|$AUTHOR|"

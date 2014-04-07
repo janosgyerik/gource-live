@@ -21,6 +21,7 @@ while true
 do
     for SHA in $(git --git-dir "$PROJECTDIR" rev-list --reverse --first-parent $SHA..$REMOTE/$BRANCH)
     do
+        test "$DEBUG" && echo "# SHA $SHA" >&2
         AUTHOR=$(git --git-dir "$PROJECTDIR" log --format=%an $SHA --max-count=1)
         TIMESTAMP=$(git --git-dir "$PROJECTDIR" log --format=%at $SHA --max-count=1)
         PREFIX="$TIMESTAMP|$AUTHOR|"
